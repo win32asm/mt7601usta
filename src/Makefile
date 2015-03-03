@@ -27,7 +27,8 @@ include $(RT28xx_DIR)/os/linux/config.mk
 RTMP_SRC_DIR = $(RT28xx_DIR)/RT$(MODULE)
 
 #PLATFORM: Target platform
-PLATFORM = PC
+# PLATFORM = PC
+PLATFORM = SYNOLOGY
 #PLATFORM = 5VT
 #PLATFORM = IKANOS_V160
 #PLATFORM = IKANOS_V180
@@ -99,6 +100,15 @@ ifeq ($(TARGET), ECOS)
 MAKE = make
 MODULE = $(shell pwd | sed "s/.*\///" ).o
 export MODULE
+endif
+
+ifeq ($(PLATFORM), SYNOLOGY)
+ifeq ($(LINUX_SRC),)
+LINUX_SRC = /home/zack/syno/source/linux-3.x
+endif
+ifeq ($(CROSS_COMPILE),)
+CROSS_COMPILE = /home/zack/spksrc/distrib/toolchains/5.1/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
+endif
 endif
 
 ifeq ($(PLATFORM),5VT)

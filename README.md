@@ -1,5 +1,37 @@
 ## MT7601U Linux driver
 
+This repo is forked from [mt7601](https://github.com/porjo/mt7601) and I have added some features for this driver:
+
+- Add supports for [Xiaomi MiniWifi](http://www.mi.com/miniwifi/) `USB_DEVICE(0x2717,0x4106)`
+- Add supports for [Synology DS713+](http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) (x86 cedarview)
+
+### Usage for Synology DS713+
+
+First get Synology [toolchain](http://sourceforge.net/projects/dsgpl/files/DSM%205.1%20Tool%20Chains/) and [kernel source](http://sourceforge.net/projects/dsgpl/files/Synology%20NAS%20GPL%20Source/5004branch/)
+
+```sh
+$ git clone https://github.com/imZack/mt7601.git
+$ cd mt7601/src
+$ export LINUX_SRC=/home/zack/syno/source/linux-3.x
+$ export CROSS_COMPILE=/home/zack/syno/toolchains/5.1/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
+$ make
+```
+
+Now you have to copy `os/linux/mt7601Usta.ko` and `RT2870STA.dat` to your target machine.
+
+On target:
+```sh
+$ mkdir -p /etc/Wireless/RT2870STA/
+$ cp RT2870STA.dat /etc/Wireless/RT2870STA/
+$ insmod mt7601Usta.ko
+```
+
+The interface will be **ra0**.
+
+> Currently the DSM WebGUI will not be able to use the wifi dongle so far, but it works with command line.
+
+--------------------------------------------------------------------------------
+
 Many cheap USB wifi dongles use the MediaTek MT7601U chip.
 
 <img src="http://porjo.github.io/mt7601/dongle1.jpg" width="150">

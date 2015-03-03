@@ -1178,3 +1178,17 @@ ifeq ($(PLATFORM),RALINK_3352)
 CFLAGS := -D__KERNEL__ -I$(LINUX_SRC)/include/asm-mips/mach-generic -I$(LINUX_SRC)/include -Wall -Wstrict-prototypes -Wno-trigraphs -O2 -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -pipe  -finline-limit=100000 -march=mips2 -mabi=32 -Wa,--trap -DLINUX -nostdinc -iwithprefix include $(WFLAGS)
 export CFLAGS
 endif
+
+ifeq ($(PLATFORM),SYNOLOGY)
+    ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+	# Linux 2.4
+	CFLAGS := -D__KERNEL__ -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -mpreferred-stack-boundary=2 -march=i686 -DMODULE -DMODVERSIONS -include $(LINUX_SRC)/include/linux/modversions.h $(WFLAGS)
+	export CFLAGS
+    else ifneq (,$(findstring 4.9,$(GCCVERSION)))
+	# GCC 4.9
+        EXTRA_CFLAGS := -Wno-error=date-time $(WFLAGS) -DSYNOLOGY
+    else
+	# Linux 2.6
+	EXTRA_CFLAGS := $(WFLAGS) -DSYNOLOGY
+    endif
+endif
