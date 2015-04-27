@@ -1192,3 +1192,17 @@ ifeq ($(PLATFORM),SYNOLOGY)
 	EXTRA_CFLAGS := $(WFLAGS) -DSYNOLOGY
     endif
 endif
+
+ifeq ($(PLATFORM),RASPBERRYPI)
+    ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+	# Linux 2.4
+	CFLAGS := -D__KERNEL__ -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -mpreferred-stack-boundary=2 -march=armv7l -DMODULE -DMODVERSIONS -include $(LINUX_SRC)/include/linux/modversions.h $(WFLAGS)
+	export CFLAGS
+    else ifneq (,$(findstring 4.9,$(GCCVERSION)))
+	# GCC 4.9
+        EXTRA_CFLAGS := -Wno-error=date-time $(WFLAGS) -DRASPBERRYPI
+    else
+	# Linux 2.6
+	EXTRA_CFLAGS := $(WFLAGS) -DRASPBERRYPI
+    endif
+endif

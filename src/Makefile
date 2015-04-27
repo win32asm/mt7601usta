@@ -28,7 +28,8 @@ RTMP_SRC_DIR = $(RT28xx_DIR)/RT$(MODULE)
 
 #PLATFORM: Target platform
 # PLATFORM = PC
-PLATFORM = SYNOLOGY
+# PLATFORM = SYNOLOGY
+PLATFORM = RASPBERRYPI
 #PLATFORM = 5VT
 #PLATFORM = IKANOS_V160
 #PLATFORM = IKANOS_V180
@@ -108,6 +109,15 @@ LINUX_SRC = /home/zack/syno/source/linux-3.x
 endif
 ifeq ($(CROSS_COMPILE),)
 CROSS_COMPILE = /home/zack/spksrc/distrib/toolchains/5.1/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
+endif
+endif
+
+ifeq ($(PLATFORM), RASPBERRYPI)
+ifeq ($(LINUX_SRC),)
+LINUX_SRC = /home/zack/rasp/linux
+endif
+ifeq ($(CROSS_COMPILE),)
+CROSS_COMPILE = /home/zack/rasp/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
 endif
 endif
 
