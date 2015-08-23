@@ -6,15 +6,29 @@ Previous author added some features for this driver:
 - Add supports for [Xiaomi MiniWifi](http://www.mi.com/miniwifi/) `USB_DEVICE(0x2717,0x4106)`
 - Add supports for [Synology DS713+](http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) (x86 cedarview)
 
+Many cheap USB wifi dongles use the MediaTek MT7601U chip.
+
+<img src="http://porjo.github.io/mt7601/dongle1.jpg" width="150">
+<img src="http://porjo.github.io/mt7601/dongle2.jpg" width="150">
+
+Unfortunately, there is no driver in Linux kernel source tree which can work with this chip, yet. This repository is based on the original driver released by MediaTek which was rejected from Linux kernel because of the poor code quality. The repository includes various stability and performance improvements for kernels >= 3.x and has been tested with the following kernels:
+
+- 3.15.10-200.fc20.x86_64
+- 3.16.1-301.fc21.x86_64
+- 3.16.1-301.fc21.i686
+- 3.17.0-0.rc2.git3.1.fc22.i686
+- 3.17.0-0.rc2.git3.1.fc22.x86_64
+- 3.12.26-1.20140808git4ab8abb.rpfr20.armv6hl.bcm2708
+
 ### Usage for Synology DS713+
 
 First get Synology [toolchain](http://sourceforge.net/projects/dsgpl/files/DSM%205.1%20Tool%20Chains/) and [kernel source](http://sourceforge.net/projects/dsgpl/files/Synology%20NAS%20GPL%20Source/5004branch/)
 
 ```sh
-$ git clone https://github.com/imZack/mt7601.git
+$ git clone https://github.com/art567/mt7601usta.git
 $ cd mt7601/src
-$ export LINUX_SRC=/home/zack/syno/source/linux-3.x
-$ export CROSS_COMPILE=/home/zack/syno/toolchains/5.1/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
+$ export LINUX_SRC=/home/syno/source/linux-3.x
+$ export CROSS_COMPILE=/home/syno/toolchains/5.1/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
 $ make
 ```
 
@@ -32,20 +46,6 @@ The interface will be **ra0**.
 > Currently the DSM WebGUI will not be able to use the wifi dongle so far, but it works with command line.
 
 --------------------------------------------------------------------------------
-
-Many cheap USB wifi dongles use the MediaTek MT7601U chip.
-
-<img src="http://porjo.github.io/mt7601/dongle1.jpg" width="150">
-<img src="http://porjo.github.io/mt7601/dongle2.jpg" width="150">
-
-Unfortunately, there is no driver in Linux kernel source tree which can work with this chip, yet. This repository is based on the original driver released by MediaTek which was rejected from Linux kernel because of the poor code quality. The repository includes various stability and performance improvements for kernels >= 3.x and has been tested with the following kernels:
-
-- 3.15.10-200.fc20.x86_64
-- 3.16.1-301.fc21.x86_64
-- 3.16.1-301.fc21.i686
-- 3.17.0-0.rc2.git3.1.fc22.i686
-- 3.17.0-0.rc2.git3.1.fc22.x86_64
-- 3.12.26-1.20140808git4ab8abb.rpfr20.armv6hl.bcm2708
 
 ### Unofficial mt7601u driver
 
