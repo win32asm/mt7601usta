@@ -1,6 +1,7 @@
 ## MT7601U Linux driver
 
-This repo is forked from [mt7601](https://github.com/porjo/mt7601) and I have added some features for this driver:
+This repo is forked from [mt7601] (https://github.com/imZack/mt7601) and I have added binary packages for this version.
+Previous author added some features for this driver:
 
 - Add supports for [Xiaomi MiniWifi](http://www.mi.com/miniwifi/) `USB_DEVICE(0x2717,0x4106)`
 - Add supports for [Synology DS713+](http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) (x86 cedarview)
