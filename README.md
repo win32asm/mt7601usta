@@ -1,10 +1,7 @@
 ## *MT7601U Linux driver*
-
-*Now that Kernel 4.2 has been released which contains a driver for mt7601u, this repository is now deprecated.*
+*Note: Kernel 4.2 has been released which contains a driver for mt7601u, this repository is now deprecated.*
 --
-
 *This repo is forked from [imZack/mt7601] (https://github.com/imZack/mt7601) and I have added binary packages for this version.*
-
 --
 
 [imZack](http://github.com/imZack/) added some features for this driver:
