@@ -1,15 +1,21 @@
-## MT7601U Linux driver
+## *MT7601U Linux driver*
 
-This repo is forked from [mt7601] (https://github.com/imZack/mt7601) and I have added binary packages for this version.
-Previous author added some features for this driver:
+*Now that Kernel 4.2 has been released which contains a driver for mt7601u, this repository is now deprecated.*
+--
+
+*This repo is forked from [imZack/mt7601] (https://github.com/imZack/mt7601) and I have added binary packages for this version.*
+
+--
+
+[imZack](http://github.com/imZack/) added some features for this driver:
 
 - Add supports for [Xiaomi MiniWifi](http://www.mi.com/miniwifi/) `USB_DEVICE(0x2717,0x4106)`
 - Add supports for [Synology DS713+](http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have) (x86 cedarview)
 
 Many cheap USB wifi dongles use the MediaTek MT7601U chip.
 
-<img src="http://porjo.github.io/mt7601/dongle1.jpg" width="150">
-<img src="http://porjo.github.io/mt7601/dongle2.jpg" width="150">
+<img src="dongle.jpg" width="150">
+<img src="board.jpg" width="150">
 
 Unfortunately, there is no driver in Linux kernel source tree which can work with this chip, yet. This repository is based on the original driver released by MediaTek which was rejected from Linux kernel because of the poor code quality. The repository includes various stability and performance improvements for kernels >= 3.x and has been tested with the following kernels:
 
