@@ -29,7 +29,8 @@
 
 INT MCUBurstWrite(PRTMP_ADAPTER pAd, UINT32 Offset, UINT32 *Data, UINT32 Cnt)
 {
-	RTUSBMultiWrite_nBytes(pAd, Offset, Data, Cnt * 4, 64); 
+	RTUSBMultiWrite_nBytes(pAd, Offset, (PUCHAR)Data, Cnt * 4, 64);
+	return 0;
 }
 
 INT MCURandomWrite(PRTMP_ADAPTER pAd, RTMP_REG_PAIR *RegPair, UINT32 Num)
@@ -38,6 +39,8 @@ INT MCURandomWrite(PRTMP_ADAPTER pAd, RTMP_REG_PAIR *RegPair, UINT32 Num)
 	
 	for (Index = 0; Index < Num; Index++)
 		RTMP_IO_WRITE32(pAd, RegPair->Register, RegPair->Value);
+	
+	return 0;
 }
 
 VOID ChipOpsMCUHook(PRTMP_ADAPTER pAd, enum MCU_TYPE MCUType)
@@ -68,8 +71,8 @@ VOID ChipOpsMCUHook(PRTMP_ADAPTER pAd, enum MCU_TYPE MCUType)
 		pChipOps->RFRandomRead = AndesRFRandomRead;
 		pChipOps->ReadModifyWrite = AndesReadModifyWrite;
 		pChipOps->RFReadModifyWrite = AndesRFReadModifyWrite;
-		pChipOps->RandomWrite = AndesRandomWrite;
-		pChipOps->RFRandomWrite = AndesRFRandomWrite;
+		pChipOps->RandomWrite = AndesRandomWritePair;
+		pChipOps->RFRandomWrite = AndesRFRandomWritePair;
 		pChipOps->PwrSavingOP = AndesPwrSavingOP;
 	}
 #endif
