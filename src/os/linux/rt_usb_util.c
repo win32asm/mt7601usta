@@ -150,7 +150,7 @@ int rausb_autopm_get_interface (
 	struct usb_interface	*intf =(struct usb_interface *)intfsrc;
 
 
-	usb_autopm_get_interface(intf);
+	return usb_autopm_get_interface(intf);
 
 }
 
