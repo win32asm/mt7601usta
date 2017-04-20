@@ -1488,7 +1488,7 @@ NTSTATUS MT7601DisableTxRx(
 	UINT32 MaxRetry;
 
 	if (!IS_MT7601(pAd))
-		return;
+		return STATUS_UNSUCCESSFUL;
 
 	DBGPRINT(RT_DEBUG_TRACE, ("----> %s\n", __FUNCTION__));
 
@@ -1712,7 +1712,12 @@ NTSTATUS MT7601DisableTxRx(
 	return STATUS_SUCCESS;
 }
 
-
+VOID MT7601DisableTxRxNC(
+	RTMP_ADAPTER *pAd,
+	UCHAR Level)
+{
+    (void)MT7601DisableTxRx(pAd, Level);
+}
 #ifdef RTMP_USB_SUPPORT
 VOID MT7601UsbAsicRadioOff(RTMP_ADAPTER *pAd, UCHAR Stage)
 {
@@ -1727,7 +1732,7 @@ VOID MT7601UsbAsicRadioOff(RTMP_ADAPTER *pAd, UCHAR Stage)
 
 	if (Stage == SUSPEND_RADIO_OFF)
 	{
-		MT7601DisableTxRx(pAd, RTMP_HALT);
+		MT7601DisableTxRxNC(pAd, RTMP_HALT);
 	}
 	else
 	{
@@ -3384,7 +3389,7 @@ VOID MT7601_Init(RTMP_ADAPTER *pAd)
 	pChipOps->SetRxAnt = MT7601SetRxAnt;
 
 
-	pChipOps->DisableTxRx = MT7601DisableTxRx;
+	pChipOps->DisableTxRx = MT7601DisableTxRxNC;
 
 #ifdef RTMP_USB_SUPPORT
 	pChipOps->AsicRadioOn = MT7601UsbAsicRadioOn;

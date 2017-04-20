@@ -5722,12 +5722,13 @@ INT set_force_amsdu(RTMP_ADAPTER *pAd, PSTRING arg)
 #ifdef RLT_RF
 INT set_rf(RTMP_ADAPTER *pAd, PSTRING arg)
 {
-	INT bank_id = 0, rf_id = 0, rv = 0;
-	UCHAR rf_val = 0;
+	INT bank_id = 0, rf_id = 0, rv = 0, rf_rd = 0;
+	UCHAR rf_val;
 	
 	if (arg)
 	{
-		rv = sscanf(arg, "%d-%d-%x", &(bank_id), &(rf_id), &(rf_val));
+		rv = sscanf(arg, "%d-%d-%x", &(bank_id), &(rf_id), &(rf_rd));
+		rf_val = (UCHAR)rf_rd;
 		DBGPRINT(RT_DEBUG_TRACE, ("%s():rv = %d, bank_id = %d, rf_id = %d, rf_val = 0x%02x\n", __FUNCTION__, rv, bank_id, rf_id, rf_val));
 		if (rv == 3)
 		{

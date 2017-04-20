@@ -2009,7 +2009,7 @@ INT AndesFunSetOP(PRTMP_ADAPTER pAd, UINT32 FunID, UINT32 Param)
 }
 
 
-INT AndesCalibrationOP(PRTMP_ADAPTER pAd, UINT32 CalibrationID, UINT32 Param)
+VOID AndesCalibrationOP(PRTMP_ADAPTER pAd, UINT32 CalibrationID, UINT32 Param)
 {
 
 	struct CMD_UNIT CmdUnit;
@@ -2048,8 +2048,6 @@ INT AndesCalibrationOP(PRTMP_ADAPTER pAd, UINT32 CalibrationID, UINT32 Param)
 	Ret = AsicSendCmdToAndes(pAd, &CmdUnit);
 
 	os_free_mem(NULL, Buf);
-
-	return NDIS_STATUS_SUCCESS;
 }
 
 INT AndesLedOP(

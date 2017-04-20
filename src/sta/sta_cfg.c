@@ -7615,7 +7615,7 @@ RtmpIoctl_rt_ioctl_siwgenie(
 				pAd->StaCfg.WpaAssocIeLen = length;
 				NdisMoveMemory(pAd->StaCfg.pWpaAssocIe, pData, pAd->StaCfg.WpaAssocIeLen);
 				pAd->StaCfg.bRSN_IE_FromWpaSupplicant = TRUE;
-				eid_ptr = pAd->StaCfg.pWpaAssocIe;
+				eid_ptr = (PEID_STRUCT)(pAd->StaCfg.pWpaAssocIe);
 				while (((UCHAR *)eid_ptr + eid_ptr->Len + 1) < ((UCHAR *)pAd->StaCfg.pWpaAssocIe + pAd->StaCfg.WpaAssocIeLen))
 				{
 					if ( eid_ptr->Eid == IE_WPA )
