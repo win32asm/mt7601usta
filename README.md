@@ -59,7 +59,7 @@ For kernels 3.19 and later a new mac80211 driver was written from scratch by the
 First install kernel-devel for your Linux distro
 
 ```sh
-$ git clone https://github.com/porjo/mt7601.git
+$ git clone https://github.com/art567/mt7601usta.git
 $ cd mt7601/src
 $ make
 $ mkdir -p /etc/Wireless/RT2870STA/
